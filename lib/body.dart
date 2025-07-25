@@ -7,11 +7,11 @@ import 'package:online_shop_app/main.dart';
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final screenWidth = MediaQuery.of(context).size.width;
-    // final screenHeight = MediaQuery.of(context).size.height;
-    // print("screenHeight $screenHeight"); print("screenWidth $screenWidth");
-    // print("20.sp =${20.sp}");
-    // print("50.h ${50.h}");print("50.w ${50.w}");
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    print("screenHeight $screenHeight"); print("screenWidth $screenWidth");
+    print("20.sp =${20.sp}");
+    print("50.h ${50.h}");print("50.w ${50.w}");
     return Column(
       children: <Widget>[
         Padding(

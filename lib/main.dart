@@ -20,6 +20,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
 //قمنا باخراج  MaterialApp من ScreenutilInit لكي تبنى مرة واحدة وليس كل مرة
   @override
   Widget build(BuildContext context) {
@@ -40,28 +41,16 @@ class RootWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      return OrientationBuilder(
-        builder: (context, orientation) {
-          final isPortrait = orientation == Orientation.portrait;
-          return ScreenUtilInit(
-            designSize: isPortrait ? const Size(360, 765) : const Size(765, 360),
-            builder: (context, child) => child!,
-            child:  HomeScreen(),
-          );
-        },
+      final isPortrait = constraints.maxHeight > constraints.maxWidth;
+      print(isPortrait);
+      return ScreenUtilInit(
+        designSize: isPortrait ? const Size(360, 765) : const Size(765, 360),
+        builder: (context, child) => child!,
+        child: HomeScreen(),
       );
     });
   }
 }
-
-
-
-
-
-
-
-
-
 
 // class MyApp extends StatelessWidget {
 //   const MyApp({super.key});
@@ -98,10 +87,6 @@ class RootWidget extends StatelessWidget {
 //
 //   }
 // }
-
-
-
-
 
 //class MyApp extends StatelessWidget {
 //   const MyApp({super.key});
