@@ -1,9 +1,10 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_shop_app/constants.dart';
+import 'package:online_shop_app/models/Product.dart';
+
+import 'categories.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -15,11 +16,13 @@ class Body extends StatelessWidget {
     // print("20.sp =${20.sp}");
     // print("50.h ${50.h}");
     // print("50.w ${50.w}");
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
             child: Text(
               "Women",
               style: Theme.of(context)
@@ -28,63 +31,59 @@ class Body extends StatelessWidget {
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
-          const CategoriesState(),
-        ],
-      ),
-    );
-  }
-}
-
-class CategoriesState extends StatefulWidget {
-  const CategoriesState({super.key});
-
-  @override
-  _CategoriesState createState() => _CategoriesState();
-}
-
-class _CategoriesState extends State<CategoriesState> {
-  List<String> categories = ["Hand bag", "Jewellery", "Footwear", "Dresses"];
- int currentIndex=0;
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50.h,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: categories.length,
-          itemBuilder: (context, index) {
-            return buildCategory(index);
-          }),
-    );
-  }
-
-  Widget buildCategory(int index) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-      child: GestureDetector(onTap: (){
-        setState(() {
-          currentIndex=index;
-        });
-      },
-        child: FittedBox(fit: BoxFit.scaleDown,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                categories[index],
-                style:
-                     TextStyle(fontWeight: FontWeight.bold, color: kTextColor,fontSize: 14.sp.clamp(10.sp, 18.sp),),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: kDefaultPaddin / 4),
-                height: 2.h,
-                width: 30.w,
-                color:currentIndex == index ? Colors.black : Colors.transparent,
-              ),
-            ],
+        ),
+        const CategoriesState(),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+            child: Items(),
           ),
         ),
-      ),
+      ],
+    );
+  }
+}
+
+class Items extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin / 4),
+      child: GridView.builder(
+          gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount:size.width < 400 ? 2: 3,
+            mainAxisExtent: 250,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 10
+          ),
+          itemCount: products.length,
+          itemBuilder: (context, index) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  height: 180,
+                  width: 160,
+                  decoration: BoxDecoration(
+                      color: products[index].color,
+                      borderRadius: const BorderRadius.all(Radius.circular(16))),
+                  child: Image.asset(
+                    products[index].image,
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: kDefaultPaddin / 4),
+                  child: Text(products[index].title),
+                ),
+                Text(
+                  "\$${products[index].price}",
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                )
+              ],
+            );
+          }),
     );
   }
 }
