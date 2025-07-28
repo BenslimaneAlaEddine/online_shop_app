@@ -17,7 +17,7 @@ class Body extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(kDefaultPaddin),
+            padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
             child: Text(
               "Women",
               style: Theme.of(context)
@@ -26,6 +26,7 @@ class Body extends StatelessWidget {
                   ?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
+          const CategoriesState(),
         ],
       ),
     );
@@ -33,15 +34,47 @@ class Body extends StatelessWidget {
 }
 
 class CategoriesState extends StatefulWidget {
+  const CategoriesState({super.key});
+
   @override
   _CategoriesState createState() => _CategoriesState();
 }
 
 class _CategoriesState extends State<CategoriesState> {
+  List<String> categories = ["Hand bag", "Jewellery", "Footwear", "Dresses"];
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 25.sp,
+      height: 40.h,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: categories.length,
+          itemBuilder: (context, index) {
+            return SingleChildScrollView(child: buildCategory(index)); // SingleChildScrollView to Avoid Overflow in ListView
+          }),
+    );
+  }
+
+  Widget buildCategory(int index) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            categories[index],
+            style:
+                 TextStyle(fontWeight: FontWeight.bold, color: kTextColor,fontSize: 14.sp,),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: kDefaultPaddin / 4),
+            height: 2.h,
+            width: 30.w,
+            color:Colors.black,
+          ),
+        ],
+      ),
     );
   }
 }
