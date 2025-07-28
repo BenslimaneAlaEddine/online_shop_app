@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,16 +44,16 @@ class CategoriesState extends StatefulWidget {
 
 class _CategoriesState extends State<CategoriesState> {
   List<String> categories = ["Hand bag", "Jewellery", "Footwear", "Dresses"];
-
+ int currentIndex=0;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40.h,
+      height: 50.h,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: categories.length,
           itemBuilder: (context, index) {
-            return SingleChildScrollView(child: buildCategory(index)); // SingleChildScrollView to Avoid Overflow in ListView
+            return buildCategory(index);
           }),
     );
   }
@@ -59,21 +61,29 @@ class _CategoriesState extends State<CategoriesState> {
   Widget buildCategory(int index) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            categories[index],
-            style:
-                 TextStyle(fontWeight: FontWeight.bold, color: kTextColor,fontSize: 14.sp,),
+      child: GestureDetector(onTap: (){
+        setState(() {
+          currentIndex=index;
+        });
+      },
+        child: FittedBox(fit: BoxFit.scaleDown,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                categories[index],
+                style:
+                     TextStyle(fontWeight: FontWeight.bold, color: kTextColor,fontSize: 14.sp.clamp(10.sp, 18.sp),),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: kDefaultPaddin / 4),
+                height: 2.h,
+                width: 30.w,
+                color:currentIndex == index ? Colors.black : Colors.transparent,
+              ),
+            ],
           ),
-          Container(
-            margin: const EdgeInsets.only(top: kDefaultPaddin / 4),
-            height: 2.h,
-            width: 30.w,
-            color:Colors.black,
-          ),
-        ],
+        ),
       ),
     );
   }
