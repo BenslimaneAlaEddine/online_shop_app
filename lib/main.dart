@@ -50,4 +50,32 @@ class RootWidget extends StatelessWidget {
   }
 }
 
+// void main() {
+//   return runApp(MaterialApp(
+//     home:MyApp(),
+//   ));
+// }
 
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Center(
+//           child: Container(
+//         height: 100,
+//         width: 100,
+//         color: Colors.red,
+//         child: FittedBox(
+//           fit: BoxFit.scaleDown,
+//           child:
+//           Text("data",style: TextStyle(fontSize: 200),)
+//           // Container(
+//           //   height: 200,
+//           //   width: 200,
+//           //   color: Colors.green,
+//           // ),
+//         ),
+//       )),
+//     );
+//   }
+// }
