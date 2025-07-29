@@ -5,7 +5,8 @@ import 'constants.dart';
 import 'models/Product.dart';
 
 class Items extends StatelessWidget {
-  const Items({super.key});
+  late Size oldSize;
+   Items({super.key,required this.oldSize});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,7 @@ class Items extends StatelessWidget {
           itemBuilder: (context, index) {
             return Item(
               index: index,
+              oldSize: oldSize,
             );
           }),
     );
@@ -32,16 +34,16 @@ class Items extends StatelessWidget {
 }
 
 class Item extends StatelessWidget {
-  Item({super.key, required this.index});
+  late Size oldSize;
+  Item({super.key, required this.index,required this.oldSize});
 
   int index;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => Details(product: products[index],)));
+          MaterialPageRoute(builder: (context) => Details(product: products[index],oldSize: oldSize,)));
     },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,3 +72,4 @@ class Item extends StatelessWidget {
     );
   }
 }
+

@@ -32,9 +32,20 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+class RootWidget extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _RootWidget();
+  }
+}
 
-class RootWidget extends StatelessWidget {
-  const RootWidget({super.key});
+class _RootWidget extends State<RootWidget> {
+  Size? initSize;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    initSize ??= MediaQuery.of(context).size;  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +55,7 @@ class RootWidget extends StatelessWidget {
       return ScreenUtilInit(
         designSize: isPortrait ? const Size(360, 784) : const Size(784, 360),
         builder: (context, child) => child!,
-        child: HomeScreen(),
+        child: HomeScreen(oldSize: initSize),
       );
     });
   }

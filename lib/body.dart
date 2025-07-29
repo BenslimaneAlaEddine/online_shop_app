@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_shop_app/constants.dart';
-
 import 'categories.dart';
 import 'items.dart';
 
 class Body extends StatelessWidget {
+  late Size oldSize;
+   Body({super.key,required this.oldSize});
+
   @override
   Widget build(BuildContext context) {
     // final screenWidth = MediaQuery.of(context).size.width;
@@ -33,10 +35,10 @@ class Body extends StatelessWidget {
           ),
         ),
         const CategoriesState(),
-        const Expanded(
+        Expanded(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-            child: Items(),
+            padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+            child: Items(oldSize: oldSize,),
           ),
         ),
       ],
