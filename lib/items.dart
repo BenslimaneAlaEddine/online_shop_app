@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_shop_app/details/details_screen.dart';
 
 import 'constants.dart';
@@ -6,13 +7,12 @@ import 'models/Product.dart';
 
 class Items extends StatelessWidget {
   late Size oldSize;
-   Items({super.key,required this.oldSize});
+
+  Items({super.key, required this.oldSize});
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery
-        .of(context)
-        .size;
+    final Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin / 4),
       child: GridView.builder(
@@ -35,16 +35,21 @@ class Items extends StatelessWidget {
 
 class Item extends StatelessWidget {
   late Size oldSize;
-  Item({super.key, required this.index,required this.oldSize});
+
+  Item({super.key, required this.index, required this.oldSize});
 
   int index;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-       Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => Details(product: products[index],oldSize: oldSize,)));
-    },
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => Details(
+                  product: products[index],
+                  oldSize: oldSize,
+                )));
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -65,11 +70,10 @@ class Item extends StatelessWidget {
           ),
           Text(
             "\$${products[index].price}",
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
           )
         ],
       ),
     );
   }
 }
-

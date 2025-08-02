@@ -19,6 +19,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
 //قمنا باخراج  MaterialApp من ScreenutilInit لكي تبنى مرة واحدة وليس كل مرة
   @override
   Widget build(BuildContext context) {
@@ -28,11 +29,11 @@ class MyApp extends StatelessWidget {
         textTheme: Theme.of(context).textTheme.apply(bodyColor: Colors.black),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home:  RootWidget(),
+      home: RootWidget(),
     );
   }
 }
-class RootWidget extends StatefulWidget{
+class RootWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -40,24 +41,25 @@ class RootWidget extends StatefulWidget{
   }
 }
 
+
 class _RootWidget extends State<RootWidget> {
   Size? initSize;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    initSize ??= MediaQuery.of(context).size;  }
+    initSize ??= MediaQuery.of(context).size;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      final isPortrait = constraints.maxHeight > constraints.maxWidth;
-      print(isPortrait);
-      return ScreenUtilInit(
-        designSize: isPortrait ? const Size(360, 784) : const Size(784, 360),
-        builder: (context, child) => child!,
-        child: HomeScreen(oldSize: initSize),
-      );
-    });
+    final isPortrait = MediaQuery.of(context).orientation;
+    print(isPortrait);
+    return ScreenUtilInit(
+      designSize: isPortrait == Orientation.portrait ? const Size(360, 784) : const Size(760, 320),
+      builder: (context, child) => child!,
+      child: HomeScreen(oldSize: initSize),
+    );
   }
 }
 
