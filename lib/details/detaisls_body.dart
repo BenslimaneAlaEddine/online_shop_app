@@ -4,6 +4,7 @@ import 'package:online_shop_app/constants.dart';
 import 'package:online_shop_app/details/product_title_with_image.dart';
 import 'package:online_shop_app/models/Product.dart';
 
+import 'color_and_size.dart';
 import 'details_screen.dart';
 
 class DetailsBody extends StatelessWidget {
@@ -40,49 +41,7 @@ class DetailsBody extends StatelessWidget {
             // width: size.width,
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text("Color"),
-                          Row(
-                            children: [
-                              ColorDot(
-                                color: Colors.blue,
-                                isSelected: true,
-                              ),
-                              ColorDot(
-                                color: Colors.orangeAccent,
-                              ),
-                              ColorDot(
-                                color: Colors.grey,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: RichText(
-                          text: TextSpan(
-                              text: "Size\n",
-                              style: const TextStyle(color: kTextColor),
-                              children: [
-                            TextSpan(
-                              text: "\$${product.size} cm",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineLarge
-                                  ?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      color: kTextColor),
-                            )
-                          ])),
-                    )
-                  ],
-                )
+                ColorAndSize(product: product)
               ],
             ),
           ),
@@ -93,32 +52,4 @@ class DetailsBody extends StatelessWidget {
   }
 }
 
-class ColorDot extends StatelessWidget {
-  ColorDot({
-    super.key,
-    required this.color,
-    this.isSelected = false,
-  });
 
-  final Color color;
-  final bool isSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(right: 10, top: 5),
-      padding: const EdgeInsets.all(2.5),
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(
-            // width: 1,
-            color: isSelected ? color : Colors.transparent,
-          )),
-      height: 24,
-      width: 24,
-      child: DecoratedBox(
-        decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-      ),
-    );
-  }
-}
