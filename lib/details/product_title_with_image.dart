@@ -52,10 +52,13 @@ class ProductTitleWithImage extends StatelessWidget {
               ),
               size.height > size.width
                   ? Expanded(
-                child: Image.asset(
-                  product.image,
-                  fit: BoxFit.contain,
-                  // height: 210,
+                child: Hero(
+                  tag: product.id,
+                  child: Image.asset(
+                    product.image,
+                    fit: BoxFit.contain,
+                    // height: 210,
+                  ),
                 ),
               )
                   : Flexible(

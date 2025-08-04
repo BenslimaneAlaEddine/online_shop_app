@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:online_shop_app/constants.dart';
 
 import 'favorite_button.dart';
-import 'outline_button_add_and_sub_counter.dart';
+import 'quantity_button.dart';
 
 class CounterAndFavorit extends StatefulWidget {
   @override
@@ -16,61 +16,64 @@ class _CounterAndFavorite extends State<CounterAndFavorit> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            QuantityButton(
-                icon: const Text(
-                  "-",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: kTextColor,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              QuantityButton(
+                  icon: const Text(
+                    "-",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: kTextColor,
+                    ),
                   ),
+                  press: () {
+                    if (counter > 0) {
+                      setState(() {
+                        counter--;
+                      });
+                    }
+                  }),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin/2),
+                child: Text(
+                  counter.toString().padLeft(2, "0"),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                press: () {
-                  if (counter > 0) {
-                    setState(() {
-                      counter--;
-                    });
-                  }
-                }),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                counter.toString().padLeft(2, "0"),
-                style: const TextStyle(fontSize: 20),
               ),
-            ),
-            QuantityButton(
-                icon: const Text(
-                  "+",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: kTextColor,
+              QuantityButton(
+                  icon: const Text(
+                    "+",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: kTextColor,
+                    ),
                   ),
-                ),
-                press: () {
-                  setState(() {
-                    counter++;
-                  });
-                })
-          ],
-        ),
-        FavoriteButton(
-          color: color,
-          press: () {
-            color == Colors.grey
-                ? setState(() {
-                    color = Colors.red;
+                  press: () {
+                    setState(() {
+                      counter++;
+                    });
                   })
-                : setState(() {
-                    color = Colors.grey;
-                  });
-          },
-        )
-      ],
+            ],
+          ),
+          FavoriteButton(
+            color: color,
+            press: () {
+              color == Colors.grey
+                  ? setState(() {
+                      color = Colors.red;
+                    })
+                  : setState(() {
+                      color = Colors.grey;
+                    });
+            },
+          )
+        ],
+      ),
     );
   }
 

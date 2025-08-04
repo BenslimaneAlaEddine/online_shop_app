@@ -25,7 +25,7 @@ class Items extends StatelessWidget {
           itemCount: products.length,
           itemBuilder: (context, index) {
             return Item(
-              index: index,
+              product: products[index],
               oldSize: oldSize,
             );
           }),
@@ -36,9 +36,9 @@ class Items extends StatelessWidget {
 class Item extends StatelessWidget {
   late Size oldSize;
 
-  Item({super.key, required this.index, required this.oldSize});
+  Item({super.key, required this.product, required this.oldSize});
 
-  int index;
+  Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class Item extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => Details(
-                  product: products[index],
+                  product: product,
                   oldSize: oldSize,
                 )));
       },
@@ -57,19 +57,22 @@ class Item extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(kDefaultPaddin),
               decoration: BoxDecoration(
-                  color: products[index].color,
+                  color: product.color,
                   borderRadius: const BorderRadius.all(Radius.circular(16))),
-              child: Image.asset(
-                products[index].image,
+              child: Hero(
+                tag: product.id,
+                child: Image.asset(
+                  product.image,
+                ),
               ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin / 4),
-            child: Text(products[index].title),
+            child: Text(product.title),
           ),
           Text(
-            "\$${products[index].price}",
+            "\$${product.price}",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
           )
         ],

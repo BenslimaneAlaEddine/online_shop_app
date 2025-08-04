@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:online_shop_app/constants.dart';
 import 'package:online_shop_app/details/counter.dart';
 import 'package:online_shop_app/details/product_title_with_image.dart';
 import 'package:online_shop_app/models/Product.dart';
 
+import 'add_to_cart.dart';
 import 'color_and_size.dart';
 import 'details_screen.dart';
 
@@ -43,14 +45,9 @@ class DetailsBody extends StatelessWidget {
             child: Column(
               children: [
                 ColorAndSize(product: product),
-                const SizedBox(
-                  height: kDefaultFontSize,
-                ),
                 Text(product.description),
-                SizedBox(
-                  height: kDefaultPaddin,
-                ),
-                CounterAndFavorit()
+                CounterAndFavorit(),
+                AddToCart(product: product)
               ],
             ),
           ),
@@ -60,3 +57,5 @@ class DetailsBody extends StatelessWidget {
     ));
   }
 }
+
+

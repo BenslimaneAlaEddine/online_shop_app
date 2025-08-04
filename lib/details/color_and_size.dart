@@ -21,47 +21,50 @@ class _ColorAndSizeState extends State<ColorAndSize> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text("Color"),
-              Row(
-                children: List.generate(
-                    widget.color.length,
-                    (index) => GestureDetector(
-                          onTap: () {
-                            setState(() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("Color"),
+                Row(
+                  children: List.generate(
+                      widget.color.length,
+                      (index) => GestureDetector(
+                            onTap: () {
                               setState(() {
-                                selected = index;
+                                setState(() {
+                                  selected = index;
+                                });
                               });
-                            });
-                          },
-                          child: ColorDot(
-                              color: widget.color[index],
-                              selected: selected,
-                              index: index),
-                        )),
-              ),
-            ],
+                            },
+                            child: ColorDot(
+                                color: widget.color[index],
+                                selected: selected,
+                                index: index),
+                          )),
+                ),
+              ],
+            ),
           ),
-        ),
-        Expanded(
-          child: RichText(
-              text: TextSpan(
-                  text: "Size\n",
-                  style: const TextStyle(color: kTextColor),
-                  children: [
-                TextSpan(
-                  text: "\$${widget.product.size} cm",
-                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      fontWeight: FontWeight.bold, color: kTextColor),
-                )
-              ])),
-        )
-      ],
+          Expanded(
+            child: RichText(
+                text: TextSpan(
+                    text: "Size\n",
+                    style: const TextStyle(color: kTextColor),
+                    children: [
+                  TextSpan(
+                    text: "\$${widget.product.size} cm",
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                        fontWeight: FontWeight.bold, color: kTextColor),
+                  )
+                ])),
+          )
+        ],
+      ),
     );
   }
 }
