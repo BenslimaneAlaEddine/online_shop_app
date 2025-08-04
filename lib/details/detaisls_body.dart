@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_shop_app/constants.dart';
+import 'package:online_shop_app/details/counter.dart';
 import 'package:online_shop_app/details/product_title_with_image.dart';
 import 'package:online_shop_app/models/Product.dart';
 
@@ -41,7 +42,15 @@ class DetailsBody extends StatelessWidget {
             // width: size.width,
             child: Column(
               children: [
-                ColorAndSize(product: product)
+                ColorAndSize(product: product),
+                const SizedBox(
+                  height: kDefaultFontSize,
+                ),
+                Text(product.description),
+                SizedBox(
+                  height: kDefaultPaddin,
+                ),
+                CounterAndFavorit()
               ],
             ),
           ),
@@ -51,5 +60,3 @@ class DetailsBody extends StatelessWidget {
     ));
   }
 }
-
-
