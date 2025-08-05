@@ -65,6 +65,24 @@ List<Product> products = [
     image: "assets/images/bag_6.png",
     color: const Color(0xFFAEAEAE),
   ),
+  Product(
+    id: 7,
+    title: "Office Code",
+    price: 200,
+    size: 12,
+    description: dummyText,
+    image: "assets/images/bag_7.png",
+    color: const Color(0xFFAEAEAE),
+  ),
+  Product(
+    id: 8,
+    title: "Office Code",
+    price: 300,
+    size: 15,
+    description: dummyText,
+    image: "assets/images/bag_8.png",
+    color: const Color(0xFFCAB8A2),
+  )
 ];
 
 String dummyText =

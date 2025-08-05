@@ -55,6 +55,9 @@ class Item extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Container(
+              //لانه يتححكم فيه gridView ولا يسمح له بالتمدد افقيا اكثر من المساحة المتاحة
+              //ولكن احذر من العناصر التي لا تحترم القيود مثل Row يحدث Overflow
+              width: double.infinity,
               padding: const EdgeInsets.all(kDefaultPaddin),
               decoration: BoxDecoration(
                   color: product.color,
@@ -74,7 +77,7 @@ class Item extends StatelessWidget {
           Text(
             "\$${product.price}",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
-          )
+          ),
         ],
       ),
     );
